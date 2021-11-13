@@ -1,4 +1,13 @@
 # express & mariaDB
 
-# npm install
-# npm start
+## Setup
+```
+ npm install
+
+```
+
+### compile
+```
+npm start
+
+```
