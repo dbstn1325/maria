@@ -3,11 +3,9 @@
 ## Setup
 ```
  npm install
-
 ```
 
 ### compile
 ```
 npm start
-
 ```
