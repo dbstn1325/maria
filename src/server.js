@@ -1,8 +1,6 @@
-import app from "./init.js"
+import express from "express";
 
-const PORT = 4000;
+const app = express();
 
-const handleListening = () =>{
-    console.log(`Access to ${PORT} port`);
-}
-app.listen(PORT, handleListening)
+
+export default app;
