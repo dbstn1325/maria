@@ -1,3 +1,4 @@
-# maria
-# hi
-# hello git
+# express & mariaDB
+
+# npm install
+# npm start
