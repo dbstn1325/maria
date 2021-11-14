@@ -5,8 +5,8 @@ import { handleHome, getJoin, postJoin, getLogin, postLogin } from "../controlle
 const rootRouter = express.Router();
 
 rootRouter.get("/", handleHome);
-rootRouter.get("/join").get(getJoin).post(postJoin);
-rootRouter.get("/login").get(getLogin).post(postLogin);
+rootRouter.route("/join").get(getJoin).post(postJoin);
+rootRouter.route("/login").get(getLogin).post(postLogin);
 
 
 export default rootRouter;
