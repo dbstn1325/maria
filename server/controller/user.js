@@ -1,3 +1,6 @@
+import * as mdbConn from "../db";
+
+
 export const handleHome = (req, res) => {
     return res.render("home", { pageTitle: "home" });
 }
@@ -17,6 +20,7 @@ export const postJoin = (req, res) => {
         })
     }
 
+    
     try{
         return res.redirect("/login");
     }catch(error){
@@ -39,7 +43,16 @@ export const logout = (req, res) => {
     return res.redirect("/");
 }
 
-export const see = (req, res) => {
+export const see = async(req, res) => {
     const { id } = req.params;
-    return res.status(200).json({id: id});
+    try{
+        const rows = await mdbConn.getUserList();
+        const { 
+            user_id: id,
+        } = rows;
+
+        return res.status(200).json(id);
+    }catch(err){
+        res.status(400).send(err.message);
+    }
 }

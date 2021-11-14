@@ -1,4 +1,4 @@
-import * as mdbConn from "../mariaDBConn";
+import * as mdbConn from "./db";
 import "dotenv/config";
 import app from "./server.js"
 
