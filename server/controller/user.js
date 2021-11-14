@@ -34,3 +34,12 @@ export const getLogin = (req, res) => {
 export const postLogin = (req, res) => {
     return res.redirect("login");
 }
+
+export const logout = (req, res) => {
+    return res.redirect("/");
+}
+
+export const see = (req, res) => {
+    const { id } = req.params;
+    return res.status(200).json({id: id});
+}
