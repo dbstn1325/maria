@@ -1,7 +1,10 @@
 import express from "express";
 import morgan from "morgan";
-import rootRouter from "./router/user";
+import rootRouter from "./router/root";
 import mariaRouter from "./router/maria";
+import userRouter from "./router/user";
+
+
 
 const app = express();
 
@@ -21,6 +24,7 @@ app.use(express.json());
 
 //route
 app.use("/", rootRouter);
+app.use("/user", userRouter);
 app.use("/maria", mariaRouter);
 
 export default app;
