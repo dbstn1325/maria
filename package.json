@@ -4,7 +4,7 @@
   "description": "Testing mariadb connection",
   "main": "init.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server/init.js"
+    "start": "nodemon --exec babel-node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -20,11 +20,15 @@
     "@babel/core": "^7.16.0",
     "@babel/node": "^7.16.0",
     "@babel/preset-env": "^7.16.0",
+    "bcrypt": "^5.0.1",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "express-mysql-session": "^2.1.7",
+    "express-session": "^1.17.2",
     "mariadb": "^2.5.5",
     "morgan": "^1.10.0",
     "multer": "^1.4.3",
+    "mysql": "^2.18.1",
     "nodemon": "^2.0.15",
     "pug": "^3.0.2"
   }

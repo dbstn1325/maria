@@ -1,17 +1,15 @@
-import * as mdbConn from "./db";
+// import * as mdbConn from "./db";
 import "dotenv/config";
-import app from "./server.js"
+// import server from "./server.js"
+
+// const PORT = process.env.PORT || 4000 ;
 
 
-mdbConn.getUserList()
-    .then((rows)=> {
-        console.log(rows);
-    })
-    .catch((errMsg)=> {
-        console.log(errMsg);
-    });
+// mdbConn.getUserList()
+//     .then((rows)=> {
+//         console.log(rows);
+//     })
+//     .catch((errMsg)=> {
+//         console.log(errMsg);
+//     });
 
-const PORT = process.env.PORT || 4000 ;
-app.listen(PORT, ()=>{
-    console.log(`Listening on port ${PORT}`);
-})
