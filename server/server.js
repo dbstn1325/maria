@@ -12,9 +12,11 @@ import { localsMiddleware } from "./middleware";
 
 
 
+
 const app = express();
 const server = http.createServer(app);
-server.listen(3001, ()=>{ console.log("hi")});
+server.listen(3001, () => { console.log("hi")});
+
 // http.createServer(function (req,res){
 //     let date = new Date();
 //     date.setDate(date.getDate() +7)
@@ -42,7 +44,7 @@ app.use(morgan('dev'));
 
 //session
 app.use(session({
-    secret: 'ABCD1234ABAB!@',
+    secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: true,
     store: new MySQLStore({
@@ -58,7 +60,6 @@ app.use(session({
 
 
 //route
-
 app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/user", userRouter);
