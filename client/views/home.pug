@@ -1,0 +1,40 @@
+extends base.pug
+
+block content
+    label(for="avatar") 진료상담 예약
+    form(method="POST")
+        input(type="text" id="name-input", name="enrollDdata")
+        input(type="submit", id="add-name-btn", value="접수")
+    form(method="POST")
+        input(placeholder="예약자 성함", id="search-input", name="searchData")
+        input(type="submit", id="search-btn", value="검색")
+    div 
+        table(style='widh:100%', border='1', id="table")
+            thead
+                tr
+                    th 순서 
+                    th 성함
+                    th 희망 진료명
+                    th 예약 날짜
+                    th 변경 날짜
+                    th 편집/삭제
+            tbody
+                each row in rows
+                    tr
+                        td #{row.ID}
+                        td #{row.NAME}
+                        td #{row.DISEASE}
+                        td #{row.CREATED_AT}
+                        td #{row.UPDATED_AT}
+                        td
+                            input(type="button", value="편집")
+                            input(type="button", value="삭제")
+                //- else
+                //-     td No Data
+                //-     td No Data
+                //-     td No Data
+                //-     td No Data
+                //-     td No Data
+                //-     td No Data
+                    
+                

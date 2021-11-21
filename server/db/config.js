@@ -12,6 +12,17 @@ const db = mysql.createConnection({
 })
 export const sessionStore = new MySQLStore(db);
 
-db.connect();
+db.connect((err)=> {
+    if(err) {
+        console.log(err.message);
+    }
+    console.log('DB ' + db.state);
+});
+
+// class DbService {
+//     static getDbServiceInstance() {
+//         return instance ? instance : new DbService();
+//     }
+// }
 
 export default db;

@@ -1,10 +1,39 @@
 import db from "../db/config";
+import connect from "../db/patient";
 import bcrypt from "bcrypt";
 
 
 
-export const handleHome = (req, res) => {
-    return res.render("home", { pageTitle: "home" });
+export const getHome = (req, res) => {
+    const sql = "SELECT * FROM patients";
+    connect.query(sql, (err, rows) => {
+        if(err){
+            return res.json("Error");
+        }
+        return res.render("home", { pageTitle: "home", rows: rows });
+    })
+    
+}
+export const postHome = (req, res) => {
+    const { 
+        searchData,
+    } = req.body;
+    const sql = "SELECT * FROM patients WHERE NAME=?";
+    connect.query(sql, searchData, (err, rows) => {
+        if(err) {
+            return res.redirect("/");
+        }
+        const results = Object.values(JSON.parse(JSON.stringify(rows)));
+        results.forEach( (v) =>{
+            // const sql = 'INSERT INTO users(`id`,`pw`,`name`) VALUES (?,?,?)'
+            // db.query()
+            return res.render("home", {items: v});
+        }
+        )}
+    );
+    
+    const sql2 = ""
+    
 }
 
 export const getJoin = (req, res) => {
@@ -28,6 +57,7 @@ export const postJoin = (req, res, next) => {
     bcrypt.hash(password1, 5, function(err, hash) {
         const sql = 'INSERT INTO users(`id`,`pw`,`name`) VALUES (?,?,?)'
         const param = [ userid, hash, username ];
+        //아이디 중복체크
         //const exists = db.query(`SELECT EXISTS(SELECT * FROM users where id="${userid})"`);
         db.query(sql, param, (err,rows)=> {
             if(err){
@@ -136,3 +166,36 @@ export const logout = (req,res) => {
         }
         res.redirect("/"); });
  }
+
+ export const getEdit = (req, res) => {
+    const {
+        userid,
+        username
+    } = req.body;
+    console.log(req.session);
+    return res.render("editUser");
+ }
+ 
+ export const postEdit = (req, res) => {
+     const { 
+         userid,
+     } = req.body;
+     
+     db.query(`SELECT * FROM users WHERE id = ? `, userid, (err, result, fields) => {
+         if(err){
+            console.log(hi);
+        }
+        
+        else{
+            const sql = `UPDATE users SET id=? WHERE id=?`;
+            db.query(sql, [userid, userid], (err, result) => {
+                console.log(result);
+            })
+            return res.redirect("/");
+         }
+     
+           })
+    }
+    
+     
+ 
