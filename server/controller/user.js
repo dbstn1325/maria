@@ -17,7 +17,9 @@ export const getHome = (req, res) => {
 export const postHome = (req, res) => {
     const { 
         searchData,
+        enrollData,
     } = req.body;
+    console.log(enrollData);
     const sql = "SELECT * FROM patients WHERE NAME=?";
     connect.query(sql, searchData, (err, rows) => {
         if(err) {
@@ -27,6 +29,7 @@ export const postHome = (req, res) => {
         results.forEach( (v) =>{
             // const sql = 'INSERT INTO users(`id`,`pw`,`name`) VALUES (?,?,?)'
             // db.query()
+            console.log(v);
             return res.render("home", {items: v});
         }
         )}
@@ -161,7 +164,6 @@ export const see = async(req, res) => {
 export const logout = (req,res) => {
     req.session.destroy(err => {
         if (err) {
-            console.log(error);
             return res.status(500).send("<h1>500 error</h1>");
         }
         res.redirect("/"); });
@@ -183,7 +185,7 @@ export const logout = (req,res) => {
      
      db.query(`SELECT * FROM users WHERE id = ? `, userid, (err, result, fields) => {
          if(err){
-            console.log(hi);
+            return res.json(err);
         }
         
         else{
@@ -195,7 +197,32 @@ export const logout = (req,res) => {
          }
      
            })
-    }
+ }
+ export const getEnrollPatient = (req, res) => {
+    return res.render("enrollPatient")
+ }
+
+ export const postEnrollPatient = (req, res) => {
+    const {
+        patientName,
+        disease
+    } = req.body;
+    const today = new Date();
+    
+    connect.query("SELECT * FROM patients", (err,rows) => {
+        const id = rows.length;
+        const sql = 'INSERT INTO patients(`ID`,`NAME`,`DISEASE`, `CREATED_AT`, `UPDATED_AT`) VALUES (?,?,?,?,?)'
+        connect.query(sql, [id+1, patientName, disease, today, today], (error, result) => {
+            if(error){
+                return res.json(err);
+            }
+            return res.redirect("/");
+        })
+    });
+    
+    
+
+ }
     
      
  
