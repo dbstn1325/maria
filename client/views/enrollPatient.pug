@@ -1,0 +1,11 @@
+extends base.pug
+
+
+block content
+    form(method="POST")
+        label(for="avatar") 환자 성함: 
+        input(type="text", value=``, name="patientName")
+        div
+            label(for="avatar") 희망 진료: 
+            input(type="text", value=``, name="disease")
+            input(type="submit", value="등록")
