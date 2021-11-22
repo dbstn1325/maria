@@ -5,19 +5,13 @@ header
         ul
             if loggedIn 
                 li 
-                    a(href=`/user/edit-profile`)
-                        span Edit
-                li 
-                    a(href="/user/logout") Logout
+                    a(href="/user/logout") 로그아웃
                 
             else
-                li 
-                    a(href="/search")
-                       i.fas.fa-search
                 li
-                    a(href="/join") Join
+                    a(href="/join") 회원가입
                 li
-                    a(href="/login").header__btn Login
+                    a(href="/login").header__btn 로그인
                 
                 
                 

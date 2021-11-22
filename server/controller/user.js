@@ -209,20 +209,75 @@ export const logout = (req,res) => {
     } = req.body;
     const today = new Date();
     
-    connect.query("SELECT * FROM patients", (err,rows) => {
-        const id = rows.length;
-        const sql = 'INSERT INTO patients(`ID`,`NAME`,`DISEASE`, `CREATED_AT`, `UPDATED_AT`) VALUES (?,?,?,?,?)'
-        connect.query(sql, [id+1, patientName, disease, today, today], (error, result) => {
+    connect.query("ALTER TABLE patients AUTO_INCREMENT=1;", (err, result, fields) => {
+        const sql = 'INSERT INTO patients(`NAME`,`DISEASE`, `CREATED_AT`, `UPDATED_AT`) VALUES (?,?,?,?)'
+        connect.query(sql, [patientName, disease, today, today], (error, result) => {
             if(error){
                 return res.json(err);
             }
             return res.redirect("/");
         })
     });
-    
-    
-
  }
+
+ export const getEditPatient = (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    const sql = `SELECT * FROM patients WHERE ID=${id}`;
+    connect.query(sql, (err, rows) => {
+        if(err){
+            return res.json(err);
+        }
+        const results = Object.values(JSON.parse(JSON.stringify(rows)));
+        results.forEach( (v) =>{
+            return res.render("editPatient", {items: v});
+    })
+    
+ })
+}
+
+ export const postEditPatient = (req, res) => {
+    const {
+        patientName,
+        disease
+    } = req.body;
+    const { id } = req.params;
+    console.log(disease);
+    
+    const sql = `SELECT * FROM patients WHERE ID=${id}`;
+    connect.query(sql, (err, rows) => {
+        if(err){
+            return res.json(err);
+        }
+        const results = Object.values(JSON.parse(JSON.stringify(rows)));
+        results.forEach( (v) =>{
+            const sql2 = `UPDATE patients SET NAME=?, DISEASE=? WHERE ID=${id}`;
+            connect.query(sql2, [patientName, disease], (err, result, fields) => {
+                if(err){
+                    return res.json(err);
+                }
+                return res.redirect("/");
+        })
+    })
+})
+  
+
+    
+ }
+ 
+ export const deletePatient = (req, res) => {
+    const { id } = req.params;
+    const sql = `DELETE FROM patients WHERE ID=${id}`;
+    connect.query(sql, (err, result, fields) => {
+        if(err){
+            return res.json(err);
+        }
+        return res.redirect("/");
+    })
+ }
+
+
+ 
     
      
  

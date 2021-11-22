@@ -1,9 +1,9 @@
 extends base.pug
 
 block content
-    label(for="avatar") 진료상담 예약
-    form(method="GET" action="/enroll")
-        input(type="submit", id="add-name-btn", value="접수")
+    label 진료상담 예약 
+    a(href="/enroll")
+        i.fas.fa-file-signature
     form(method="POST")
         input(placeholder="예약자 성함", id="search-input", name="searchData")
         input(type="submit", id="search-btn", value="검색")
@@ -11,38 +11,38 @@ block content
         table(style='widh:100%', border='1', id="table")
             thead
                 tr
-                    th 순서 
                     th 성함
                     th 희망 진료명
                     th 예약 날짜
                     th 변경 날짜
-                    th 편집/삭제
+                    th 수정
             tbody
                 if(items)
                     tr
-                        td #{items.ID}
                         td #{items.NAME}
                         td #{items.DISEASE}
                         td #{items.CREATED_AT}
                         td #{items.UPDATED_AT}
                         td
-                            a(class='button' href=`/edit/:${items.ID}`) 편집 
-                            a(class='button' href=`/delete/:${items.ID}`) 삭제
+                            form(method="GET" action=`/edit/${items.ID}`)
+                            input(type="submit", value="편집")
+                            form(method="POST" action=`/delete/${items.ID}`)
+                            input(type="submit", value="삭제")
                 else
                     if(rows)
                         div.patient__info
                             each row in rows
                                 tr
-                                    td #{row.ID}
                                     td #{row.NAME}
                                     td #{row.DISEASE}
                                     td #{row.CREATED_AT}
                                     td #{row.UPDATED_AT}
                                     td
-                                        a(class='button' href=`/edit/:${row.ID}`) 편집 
-                                        a(class='button' href=`/delete/:${row.ID}`) 삭제
+                                        form(method="GET" action=`/edit/${row.ID}`)
+                                            input(type="submit", value="편집")
+                                        form(method="POST" action=`/delete/${row.ID}`)
+                                            input(type="submit", value="삭제")
                     else
-                        td No Data
                         td No Data
                         td No Data
                         td No Data
