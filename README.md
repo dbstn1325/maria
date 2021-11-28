@@ -1,4 +1,4 @@
-# express & mariaDB
+# express & mariaDB Practice
 
 ## Setup
 ```
