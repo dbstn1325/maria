@@ -1,4 +1,4 @@
-import db from "../db/config";
+import db from "../db/user";
 import connect from "../db/patient";
 import bcrypt from "bcrypt";
 
@@ -99,7 +99,7 @@ export const postLogin = async(req, res) => {
             if( result.length > 0 ){
                 bcrypt.compare(password1, result[0].pw, (err,result) => {
                     if(err){
-                        return res.status(400).render("login", {
+                        return res.status(404).render("login", {
                             errorMessage: "비밀번호를 다시 입력해주세요"
                         });
                     }
@@ -139,11 +139,6 @@ export const postLogin = async(req, res) => {
     })
     
             
-    
-
-    
-    
-  
 
 }
 
