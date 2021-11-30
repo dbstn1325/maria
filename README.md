@@ -6,8 +6,7 @@
 
 
 - node, mysql, pug 설치 완료
-- localhost에 데이터 저장할 데이터베이스 생성되어 있음 (코드에는 : user_database, patient_database)
-- localhost의 MySQL 데이터베이스에 데이터 insert 되어 있음
+- localhost의 MySQL 데이터베이스에 데이터 생성되어 있음 (코드에는 : user_database, patient_database)
 - 회원가입 및 로그인 과정 시 비밀번호 암호화 처리 과정(bcrypt)
 - nodemon, babel-node 설정을 통해 컴파일 간편화
 - nodejs의 view engine 'pug'와 MYSQL간 연동에 관한 자료는 pug 공식문서 참고(https://pugjs.org/api/getting-started.html)
