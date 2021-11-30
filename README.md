@@ -7,7 +7,8 @@
 - localhost에 데이터 저장할 데이터베이스 생성되어 있음 (코드에는 : user_database, patient_database)
 - localhost의 MySQL 데이터베이스에 데이터 insert 되어 있음
 - 회원가입 및 로그인 과정 시 비밀번호 암호화 처리 과정(bcrypt)
-- nodemon, babel-node 설정으로 컴파일 간편화
+- nodemon, babel-node 설정을 통해 컴파일 간편화
+- 많은 자료들에서 nodejs의 view engine 'pug'와 mysql간 연동에 관한 자료는 적어, pug 공식문서 참고(https://pugjs.org/api/getting-started.html)
 
 ### 실행
 .env 파일 내 설정에 따라 수정
@@ -26,3 +27,7 @@ npm start
 >
 
 <img width="476" alt="1" src="https://user-images.githubusercontent.com/78465062/144003399-586c403a-aadf-4240-946e-845a894303c3.png">
+
+
+### 추후 개발해나가야 할 점
+- 특정 예약 환자를 삭제하고 다시 예약 등록을 함. 이를 PATIENT_DB를 MYSQL Client로 보았을 때, 삭제된 ID를 제외하고 자동으로 초기화시켜, 생성된 ID가 다음ID로 이어지게 구현함. 하지만 이렇게만 할 경우 환자가 많아질수록 ID고유값이 무분별하게 사용될 확률이 높음. 좀 더 좋은 방법으로 무분별한 ID사용을 막을 필요가 있음. 
