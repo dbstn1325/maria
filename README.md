@@ -1,4 +1,4 @@
-# express & mysql 연동 연습 (진료 상담 예약)
+# express & pug & MYSQL 연동 연습 (진료 상담 예약)
 
 
 ### Precondition
