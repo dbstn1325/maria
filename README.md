@@ -2,10 +2,12 @@
 
 
 ### Precondition
+<img width="425" alt="555" src="https://user-images.githubusercontent.com/78465062/144005402-6724e800-93ea-4088-9106-267cc0e16de3.png">
 - node, mysql, pug 설치 완료
 - localhost에 데이터 저장할 데이터베이스 생성되어 있음 (코드에는 : user_database, patient_database)
 - localhost의 MySQL 데이터베이스에 데이터 insert 되어 있음
 - 회원가입 및 로그인 과정 시 비밀번호 암호화 처리 과정(bcrypt)
+- nodemon, babel-node 설정으로 컴파일 간편화
 
 ### 실행
 .env 파일 내 설정에 따라 수정
