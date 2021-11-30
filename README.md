@@ -1,11 +1,26 @@
-# express & mariaDB Practice
+# express & mysql 연동 연습 (진료 상담 예약)
 
-## Setup
-```
- npm install
-```
 
-### compile
-```
+### Precondition
+- node, mysql, pug 설치 완료
+- localhost에 데이터 저장할 데이터베이스 생성되어 있음 (코드에는 : user_database, patient_database)
+- localhost의 MySQL 데이터베이스에 데이터 insert 되어 있음
+- 회원가입 및 로그인 과정 시 비밀번호 암호화 처리 과정(bcrypt)
+
+### 실행
+.env 파일 내 설정에 따라 수정
+- MYSQL > USER_DATABASE > HOST, PORT, USER, PASSWORD, DATABASE 설정 (패스워드 없다면 설정해야 함)
+        > PATIENT_DB > HOST, PORT, USER, PASSWORD, DATABASE, DATESTRINGS 설정 (패스워드 없다면 설정해야 함)
+
+```bash
+cd maria
+npm install
 npm start
 ```
+
+### 실행 후 데이터베이스 
+
+<img width="596" alt="2" src="https://user-images.githubusercontent.com/78465062/144003436-f364c70b-6a23-4b96-9024-62714908de5f.png">
+>
+
+<img width="476" alt="1" src="https://user-images.githubusercontent.com/78465062/144003399-586c403a-aadf-4240-946e-845a894303c3.png">
