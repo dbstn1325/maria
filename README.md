@@ -9,8 +9,8 @@
 
 ### 실행
 .env 파일 내 설정에 따라 수정
-- MYSQL > USER_DATABASE > HOST, PORT, USER, PASSWORD, DATABASE 설정 (패스워드 없다면 설정해야 함)
-        > PATIENT_DB > HOST, PORT, USER, PASSWORD, DATABASE, DATESTRINGS 설정 (패스워드 없다면 설정해야 함)
+- MYSQL > USER_DATABASE > HOST, PORT, USER, PASSWORD, DATABASE 설정 (패스워드 없다면 설정해야 함) 
+- MYSQL > PATIENT_DB > HOST, PORT, USER, PASSWORD, DATABASE, DATESTRINGS 설정 (패스워드 없다면 설정해야 함)
 
 ```bash
 cd maria
