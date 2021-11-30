@@ -16,7 +16,7 @@
 - MYSQL > PATIENT_DB > HOST, PORT, USER, PASSWORD, DATABASE, DATESTRINGS 설정 (패스워드 없다면 설정해야 함)
 
 ```bash
-cd maria
+cd mysql
 npm install
 npm start
 ```
