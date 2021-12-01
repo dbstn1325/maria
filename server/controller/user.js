@@ -8,9 +8,9 @@ export const getHome = (req, res) => {
     const sql = "SELECT * FROM patients";
     connect.query(sql, (err, rows) => {
         if(err){
-            return res.json("Error");
+            return res.status(400).render("404", { errorMessage: "getHome DB select Error"});
         }
-        return res.render("home", { pageTitle: "home", rows: rows });
+        return res.status(200).render("home", { pageTitle: "home", rows: rows });
     })
     
 }
@@ -23,14 +23,14 @@ export const postHome = (req, res) => {
     const sql = "SELECT * FROM patients WHERE NAME=?";
     connect.query(sql, searchData, (err, rows) => {
         if(err) {
-            return res.redirect("/");
+            return res.status(400).render("404", { errorMessage: "postHome DB select Error"});
         }
         const results = Object.values(JSON.parse(JSON.stringify(rows)));
         results.forEach( (v) =>{
             // const sql = 'INSERT INTO users(`id`,`pw`,`name`) VALUES (?,?,?)'
             // db.query()
             console.log(v);
-            return res.render("home", {items: v});
+            return res.status(200).render("home", {items: v});
         }
         )}
     );
@@ -69,7 +69,7 @@ export const postJoin = (req, res, next) => {
                 })
             }
             else{
-                return res.send("회원가입이 완료되었습니다.");
+                return res.status(201).send("회원가입이 완료되었습니다.");
             }
         });
         
@@ -111,7 +111,7 @@ export const postLogin = async(req, res) => {
                     //아이디 확인
                     db.query(sql, function (err, rows, result) {
                         if (err) {
-                            return res.send("해당 아이디는 존재하지 않습니다.");
+                            return res.status(400).send("해당 아이디는 존재하지 않습니다.");
                         }else{
                             //아이디확인
                             const result = Object.values(JSON.parse(JSON.stringify(rows)));
@@ -159,40 +159,11 @@ export const see = async(req, res) => {
 export const logout = (req,res) => {
     req.session.destroy(err => {
         if (err) {
-            return res.status(500).send("<h1>500 error</h1>");
+            return res.status(400).render("404", { errorMessage: "logout Error"});
         }
         res.redirect("/"); });
  }
-
- export const getEdit = (req, res) => {
-    const {
-        userid,
-        username
-    } = req.body;
-    console.log(req.session);
-    return res.render("editUser");
- }
  
- export const postEdit = (req, res) => {
-     const { 
-         userid,
-     } = req.body;
-     
-     db.query(`SELECT * FROM users WHERE id = ? `, userid, (err, result, fields) => {
-         if(err){
-            return res.json(err);
-        }
-        
-        else{
-            const sql = `UPDATE users SET id=? WHERE id=?`;
-            db.query(sql, [userid, userid], (err, result) => {
-                console.log(result);
-            })
-            return res.redirect("/");
-         }
-     
-           })
- }
  export const getEnrollPatient = (req, res) => {
     return res.render("enrollPatient")
  }
@@ -208,7 +179,7 @@ export const logout = (req,res) => {
         const sql = 'INSERT INTO patients(`NAME`,`DISEASE`, `CREATED_AT`, `UPDATED_AT`) VALUES (?,?,?,?)'
         connect.query(sql, [patientName, disease, today, today], (error, result) => {
             if(error){
-                return res.json(err);
+                return res.status(400).render("404", { errorMessage: "postEnroll DB insert Error"});
             }
             return res.redirect("/");
         })
@@ -221,7 +192,7 @@ export const logout = (req,res) => {
     const sql = `SELECT * FROM patients WHERE ID=${id}`;
     connect.query(sql, (err, rows) => {
         if(err){
-            return res.json(err);
+            return res.status(400).render("404", { errorMessage: "getEdit DB select Error"});
         }
         const results = Object.values(JSON.parse(JSON.stringify(rows)));
         results.forEach( (v) =>{
@@ -242,16 +213,16 @@ export const logout = (req,res) => {
     const sql = `SELECT * FROM patients WHERE ID=${id}`;
     connect.query(sql, (err, rows) => {
         if(err){
-            return res.json(err);
+            return res.status(400).render("404", { errorMessage: "postEdit DB select Error"});
         }
         const results = Object.values(JSON.parse(JSON.stringify(rows)));
         results.forEach( (v) =>{
             const sql2 = `UPDATE patients SET NAME=?, DISEASE=? WHERE ID=${id}`;
             connect.query(sql2, [patientName, disease], (err, result, fields) => {
                 if(err){
-                    return res.json(err);
+                    return res.status(400).render("404", { errorMessage: "postEdit DB update Error"});
                 }
-                return res.redirect("/");
+                return res.status(201).redirect("/");
         })
     })
 })
@@ -265,9 +236,9 @@ export const logout = (req,res) => {
     const sql = `DELETE FROM patients WHERE ID=${id}`;
     connect.query(sql, (err, result, fields) => {
         if(err){
-            return res.json(err);
+            return res.status(400).json(err);
         }
-        return res.redirect("/");
+        return res.status(204).redirect("/");
     })
  }
 
