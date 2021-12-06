@@ -34,9 +34,6 @@ export const postHome = (req, res) => {
         }
         )}
     );
-    
-    const sql2 = ""
-    
 }
 
 export const getJoin = (req, res) => {
